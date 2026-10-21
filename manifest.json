@@ -1,0 +1,42 @@
+{
+  "only_public_or_fictional_data": true,
+  "api_calls_from_demo": 0,
+  "files": {
+    ".nojekyll": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "announcement.pdf": {
+      "bytes": 466846,
+      "sha256": "0c37de4abd955e38ec76abb810173798f7a67deadab979f19783e2949cb89040"
+    },
+    "app.js": {
+      "bytes": 5370,
+      "sha256": "b0f784f61adeecc78ee626489b16d2e9afe23ebfc121af8eb31f52b555fc2bce"
+    },
+    "demo-data.json": {
+      "bytes": 312870,
+      "sha256": "0e751a15a3dafb292fd9b0f3cabed2ec04d4995de4803c4cbee9fcbc9ef3fca6"
+    },
+    "draft.csv": {
+      "bytes": 10452,
+      "sha256": "161a8c509fbf1806cb2106172eb55fc1171fd7b80225d197cea9ef2f81e92ee9"
+    },
+    "index.html": {
+      "bytes": 4393,
+      "sha256": "21bf3496562470e29e5a478c2bc9beae80100f581a80384b4652a10b1a54f327"
+    },
+    "README.md": {
+      "bytes": 1271,
+      "sha256": "15533a54bc6bba7750db9ba669d752c9a53ba9861a87bb421438e0ef793d4af3"
+    },
+    "review-default.pdf": {
+      "bytes": 83126,
+      "sha256": "eebe57c3c07d8af881445626415e27919f4f597ee156daa12ac71ef020d996d7"
+    },
+    "style.css": {
+      "bytes": 4516,
+      "sha256": "54f0fd4794f8726238a5d8bf689518ef3e39480268a3b46aef1e382bdb415d94"
+    }
+  }
+}

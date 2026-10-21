@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GrantFit 사회적경제 지원사업 검토 보조 도구의 과거 공고·가상정보 기반 연구 데모">
+  <title>GrantFit | 공고 검토 데모</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<header><div class="wrap brand"><strong>GrantFit</strong><span>공고 검토 데모</span><span class="status">보존 응답 기반</span></div></header>
+<main class="wrap">
+  <h1>지원사업 요건 검토</h1>
+  <p class="intro">과거 공고 · 실험용 가상정보 · 신청 및 선정 가능 여부 최종 판단 아님</p>
+  <div class="notice">새 PDF 분석·실시간 AI 호출을 제공하지 않는 공개 시연입니다. 실제 기관정보를 입력하거나 전송하지 않습니다.</div>
+  <div id="loading" role="status">검토 자료를 불러오고 있습니다.</div>
+  <div id="app" hidden>
+    <section class="controls no-print" aria-label="실험 설정">
+      <fieldset><legend>응답 출처</legend><div class="modes">
+        <label><input type="radio" name="mode" value="live" checked> 실제 AI 1회 응답</label>
+        <label><input type="radio" name="mode" value="fixture"> 고정 응답 시험</label>
+      </div></fieldset>
+      <label class="region">가상 소재지<select id="region"></select></label>
+    </section>
+    <section aria-labelledby="source-title">
+      <h2 id="source-title"></h2>
+      <p id="source-meta" class="muted"></p>
+      <div class="links no-print"><a id="source-link" target="_blank" rel="noopener noreferrer">공식 게시판 원문</a><a href="announcement.pdf" target="_blank" rel="noopener">본문 PDF 6쪽</a></div>
+      <p class="caution">본문만 검토했습니다. 신청서식 HWP·2024 참고 리포트는 미검토입니다. 인용문 일치는 AI 요약의 의미 정확성을 보장하지 않습니다.</p>
+    </section>
+    <section aria-label="대조 결과">
+      <p id="mode-note" class="muted"></p>
+      <p id="automation-note" class="notice" role="status"></p>
+      <dl class="metrics"><div><dt>추출 항목</dt><dd id="count-items"></dd></div><div><dt>지정 페이지 인용 일치</dt><dd id="count-evidence"></dd></div><div><dt>자동 대조</dt><dd id="count-auto"></dd></div><div><dt>담당자 확인 필수</dt><dd id="count-manual"></dd></div></dl>
+      <div class="section-heading"><h2>근거 검토표</h2><div class="actions no-print"><button id="print" type="button">A4 인쇄</button><button id="download" type="button">결과 JSON</button></div></div>
+      <p id="input-context" class="muted"></p>
+      <div id="rows"></div>
+      <section id="invalid-section" hidden><h2>근거 검증 실패</h2><p class="caution">아래 항목은 정상 검토 결과가 아닙니다.</p><div id="invalid-rows"></div></section>
+    </section>
+    <section>
+      <h2>AI 작성 기준표 초안과의 대조</h2>
+      <p>사람이 검토한 정답표나 독립 평가용 Gold Standard가 아닙니다. 동일 공고·응답을 본 AI가 작성한 초안입니다.</p>
+      <p id="coverage-note"></p>
+      <details><summary>항목별 인용 구간 포함 여부</summary><div id="coverage"></div></details>
+    </section>
+    <section>
+      <h2>실험 정보와 제한</h2>
+      <p>실제 AI 응답은 여러 요건·서류를 묶었습니다. 대체서류 요약에 원문에 없는 ‘또는’을 추가한 부분이 있어 담당자 확인이 필요합니다. 자동 대조는 입력값의 단일 요소 비교일 뿐 법적 유효성·전체 신청자격 판단이 아닙니다.</p>
+      <details><summary>실험용 가상 기관정보</summary><pre id="company"></pre></details>
+      <div class="links no-print"><a href="draft.csv" download>기준표 초안 CSV</a><a href="review-default.pdf" target="_blank" rel="noopener">기본 가상정보 A4 PDF</a></div>
+      <p class="muted">다운로드 PDF는 대구 소재지 기본값 기준 보존본입니다. 현재 선택값의 전체 결과는 A4 인쇄에서 확인할 수 있습니다.</p>
+    </section>
+  </div>
+</main>
+<footer class="wrap">GrantFit 연구 프로토타입 · 2026-10-21 공개 데모 · 운영기관의 공식 자격 판정 서비스가 아닙니다.</footer>
+</body>
+</html>
