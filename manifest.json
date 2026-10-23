@@ -11,20 +11,20 @@
       "sha256": "0c37de4abd955e38ec76abb810173798f7a67deadab979f19783e2949cb89040"
     },
     "app.js": {
-      "bytes": 5370,
-      "sha256": "b0f784f61adeecc78ee626489b16d2e9afe23ebfc121af8eb31f52b555fc2bce"
+      "bytes": 5163,
+      "sha256": "af5df29dd48615dd626807ac434e7e110ea84950664a14a7df8ea17c2834c0c8"
     },
     "demo-data.json": {
-      "bytes": 312870,
-      "sha256": "0e751a15a3dafb292fd9b0f3cabed2ec04d4995de4803c4cbee9fcbc9ef3fca6"
+      "bytes": 313517,
+      "sha256": "7f2e1ed8ef47e63a92bbef07f631bdd668b77af2d02561cded094e0126fc33f6"
     },
     "draft.csv": {
       "bytes": 10452,
       "sha256": "161a8c509fbf1806cb2106172eb55fc1171fd7b80225d197cea9ef2f81e92ee9"
     },
     "index.html": {
-      "bytes": 4393,
-      "sha256": "21bf3496562470e29e5a478c2bc9beae80100f581a80384b4652a10b1a54f327"
+      "bytes": 4402,
+      "sha256": "15bce0cd66308bd1821b4ed064a472ef4fb87e0ea4e36320dc3644dec43b285a"
     },
     "README.md": {
       "bytes": 1271,
@@ -37,6 +37,46 @@
     "style.css": {
       "bytes": 4516,
       "sha256": "54f0fd4794f8726238a5d8bf689518ef3e39480268a3b46aef1e382bdb415d94"
+    },
+    "documents/grantfit-fixture-busan.docx": {
+      "bytes": 42686,
+      "sha256": "bd455385556c02bdc9fccf1661ef7773395723606366ce601b07e89593c4aacb"
+    },
+    "documents/grantfit-fixture-daegu.docx": {
+      "bytes": 42683,
+      "sha256": "5a2c7e09c32eb82149a67f2f6eea0e1a749df3691ccb0e500f60bcdbe587a703"
+    },
+    "documents/grantfit-fixture-gyeongbuk.docx": {
+      "bytes": 42678,
+      "sha256": "13d8f7adf33d8416895da935f54fbe1c2dba0b5c44969c6daf3188b0b2891e63"
+    },
+    "documents/grantfit-fixture-missing.docx": {
+      "bytes": 42647,
+      "sha256": "1e37c7af0ea179b22df46c65d4f92eb35faf5c21ef3fed9ffbd8a543841395d1"
+    },
+    "documents/grantfit-fixture-seoul.docx": {
+      "bytes": 42688,
+      "sha256": "96953072f4cd4896424bc317bd6ddfdd9287f35b20a5289b49a643f5b03cf353"
+    },
+    "documents/grantfit-live-busan.docx": {
+      "bytes": 41223,
+      "sha256": "863a121bc9e134baaa248ecd87aa3ed9e8d5836e2f131328cb21cc2bd2814cf6"
+    },
+    "documents/grantfit-live-daegu.docx": {
+      "bytes": 41221,
+      "sha256": "9b1b9bdfa67452295e5e4c6f4d2b632597e8bf8b3880a9fccfe832ab79cecc0d"
+    },
+    "documents/grantfit-live-gyeongbuk.docx": {
+      "bytes": 41215,
+      "sha256": "7b2c04c1ec9003c78d49d810a3e9bc51f4612ff471c0f44271f09ec24788cb33"
+    },
+    "documents/grantfit-live-missing.docx": {
+      "bytes": 41213,
+      "sha256": "3ac469157a8608f9056bebf0c28e2493e1a3f126deadcbe898acfd57c777f638"
+    },
+    "documents/grantfit-live-seoul.docx": {
+      "bytes": 41222,
+      "sha256": "e04cd88e6fbacb70f0e4fd514bc05103b176bb63f2436500681cb3c13c2e3876"
     }
   }
 }

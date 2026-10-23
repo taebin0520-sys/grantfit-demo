@@ -36,6 +36,8 @@ function render() {
   const mode = document.querySelector('input[name="mode"]:checked').value;
   const region = $('region').value;
   selected = demo.variants[mode][region];
+  $('download').href = selected.document_url;
+  $('download').download = selected.document_url.split('/').pop();
   const m = selected.metrics;
   $('count-items').textContent = m.extracted_items;
   $('count-evidence').textContent = `${m.evidence_match} / ${m.extracted_items}`;
@@ -59,7 +61,7 @@ function render() {
 }
 async function start() {
   try {
-    const response = await fetch('demo-data.json');
+    const response = await fetch('demo-data.json?v=20261023-docx');
     if (!response.ok) throw new Error('data unavailable');
     demo = await response.json();
     for (const region of demo.regions) {
@@ -71,11 +73,6 @@ async function start() {
     document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', render));
     $('region').addEventListener('change', render);
     $('print').addEventListener('click', () => window.print());
-    $('download').addEventListener('click', () => {
-      const url = URL.createObjectURL(new Blob([JSON.stringify(selected, null, 2)], {type:'application/json'}));
-      const a = document.createElement('a'); a.href = url; a.download = 'grantfit-review.json'; a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    });
     $('loading').hidden = true; $('app').hidden = false; render();
   } catch (_) {
     $('loading').textContent = '자료를 불러오지 못했습니다. 잠시 후 새로고침해 주세요. 이 데모는 HTTPS 공유 주소 또는 로컬 HTTP 서버에서 열어야 합니다.';

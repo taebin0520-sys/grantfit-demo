@@ -6,7 +6,7 @@
   <meta name="description" content="GrantFit 사회적경제 지원사업 검토 보조 도구의 과거 공고·가상정보 기반 연구 데모">
   <title>GrantFit | 공고 검토 데모</title>
   <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20261023-docx" defer></script>
 </head>
 <body>
 <header><div class="wrap brand"><strong>GrantFit</strong><span>공고 검토 데모</span><span class="status">보존 응답 기반</span></div></header>
@@ -33,7 +33,7 @@
       <p id="mode-note" class="muted"></p>
       <p id="automation-note" class="notice" role="status"></p>
       <dl class="metrics"><div><dt>추출 항목</dt><dd id="count-items"></dd></div><div><dt>지정 페이지 인용 일치</dt><dd id="count-evidence"></dd></div><div><dt>자동 대조</dt><dd id="count-auto"></dd></div><div><dt>담당자 확인 필수</dt><dd id="count-manual"></dd></div></dl>
-      <div class="section-heading"><h2>근거 검토표</h2><div class="actions no-print"><button id="print" type="button">A4 인쇄</button><button id="download" type="button">결과 JSON</button></div></div>
+      <div class="section-heading"><h2>근거 검토표</h2><div class="actions no-print"><button id="print" type="button">A4 인쇄</button><a id="download" download>결과 Word (.docx)</a></div></div>
       <p id="input-context" class="muted"></p>
       <div id="rows"></div>
       <section id="invalid-section" hidden><h2>근거 검증 실패</h2><p class="caution">아래 항목은 정상 검토 결과가 아닙니다.</p><div id="invalid-rows"></div></section>
