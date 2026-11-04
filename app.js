@@ -3,6 +3,7 @@ let demo;
 let selected;
 const MATCH = '입력값 부합';
 const MISMATCH = '입력값 미부합';
+const checked = new Map(); // 제출서류 체크 상태. 메모리에만 두며 저장하지 않는다.
 const $ = id => document.getElementById(id);
 function text(tag, value, className) {
   const node = document.createElement(tag);
@@ -15,7 +16,7 @@ function statusOf(row) {
   if (!row.evidence_valid) return ['원문 재확인', 'hold'];
   if (row.result === MATCH) return ['부합', 'match'];
   if (row.result === MISMATCH) return ['미부합', 'mismatch'];
-  return ['사람 확인', 'hold'];
+  return ['담당자 확인', 'hold'];
 }
 function holdSummary(rows) {
   const counts = new Map();
@@ -41,21 +42,21 @@ function rowView(row) {
   const aiLabel = text('p', 'AI 요약 (미검증)', 'ai-label');
   const title = text('h3', row.ai_summary, 'card-title');
   const orNote = GrantFitGroups.summaryAddsOr(row)
-    ? text('p', `검토 의견: AI 요약이나 확인 정보에는 ‘또는’이 있지만 원문 인용에는 없습니다. 두 서류의 제출 관계는 원문과 담당자 확인 필요 (원문 ${row.page}쪽).`, 'review-note')
+    ? text('p', `검토 의견: AI 요약·확인 정보에 ‘또는’이 있으나 원문 인용에는 없습니다. 제출 관계는 원문과 담당자 확인 (원문 ${row.page}쪽).`, 'review-note')
     : null;
   const why = document.createElement('p');
   why.className = 'card-why';
-  why.append(text('strong', row.evidence_valid ? `원문 ${row.page}쪽 확인. ` : '원문 확인 필요. '), text('span', row.reason ? `사유: ${GrantFitGroups.humanize(row.reason)}` : ''));
+  why.append(text('strong', row.evidence_valid ? `원문 ${row.page}쪽 확인. ` : '원문 확인 필요. '), text('span', row.reason ? GrantFitGroups.humanize(row.reason) : ''));
   const need = text('p', `확인할 정보: ${GrantFitGroups.humanize(row.required_info)}`, 'card-need');
   const details = document.createElement('details');
   details.className = 'fold';
-  details.append(text('summary', '원문과 세부 내용 보기'));
+  details.append(text('summary', '원문 보기'));
   const list = document.createElement('dl');
   const values = [
     ['종류', `${row.kind} (announcement.pdf ${row.page}쪽)`],
     ['원문 인용', row.raw_quote],
-    ['조건·예외', row.conditions || '별도 조건 기록 없음'],
-    ['자동 판정', row.automatic ? '예 - 단일 요소만 비교' : '아니오']
+    ['조건·예외', row.conditions || '없음'],
+    ['자동 판정', row.automatic ? '예 (단일 요소만 비교)' : '아니오']
   ];
   for (const [key, value] of values) list.append(text('dt', key), text('dd', value, key === '원문 인용' ? 'quote' : ''));
   if (row.evidence_valid) {
@@ -90,6 +91,53 @@ function renderGroups(rows) {
   if (!blocks.length) blocks.push(text('p', '표시할 항목이 없습니다.', 'muted'));
   $('groups').replaceChildren(...blocks);
 }
+// 입력한 소재지·기업 유형과 관련된 항목만 골라 보여 준다. 판정 결과를 새로 계산하지 않는다.
+function renderMyMatches(rows) {
+  const orgType = $('org-type').value.trim();
+  const region = $('region').value;
+  const wanted = [];
+  if (region) wanted.push('소재');
+  if (orgType) wanted.push('기업 유형');
+  const related = rows.filter(r => {
+    const need = GrantFitGroups.humanize(r.required_info);
+    return wanted.some(w => need.includes(w));
+  });
+  const lines = related.map(r => {
+    const line = document.createElement('li');
+    const state = r.automatic ? `자동 판정: ${r.result}` : '담당자 확인';
+    line.append(text('strong', r.id), text('span', ` ${r.ai_summary} · ${state}`));
+    return line;
+  });
+  const head = related.length
+    ? `입력 정보와 관련된 항목 ${related.length}건 (판정은 저장된 응답 기준)`
+    : '입력 정보와 관련된 항목이 없습니다.';
+  const list = document.createElement('ul');
+  list.append(...lines);
+  $('my-matches').replaceChildren(text('p', head, 'muted'), list);
+}
+// 제출서류 체크리스트. 파일을 받지 않고, 상태도 저장하지 않는다.
+function renderChecklist(rows) {
+  const docs = rows.filter(r => r.kind === '제출서류');
+  const items = docs.map(r => {
+    const label = document.createElement('label');
+    label.className = 'check';
+    const box = document.createElement('input');
+    box.type = 'checkbox';
+    box.checked = checked.get(r.id) === true;
+    box.addEventListener('change', () => {
+      checked.set(r.id, box.checked);
+      updateChecklistCount(docs);
+    });
+    label.append(box, text('span', `${r.id} ${r.ai_summary}`));
+    return label;
+  });
+  $('checklist').replaceChildren(...items);
+  updateChecklistCount(docs);
+}
+function updateChecklistCount(docs) {
+  const done = docs.filter(r => checked.get(r.id) === true).length;
+  $('checklist-count').textContent = `준비 ${done} / ${docs.length}건`;
+}
 function render() {
   const mode = document.querySelector('input[name="mode"]:checked').value;
   const region = $('region').value;
@@ -98,20 +146,22 @@ function render() {
   $('download').download = selected.document_url.split('/').pop();
   const m = selected.metrics;
   $('verdict').textContent = m.automatic_comparisons
-    ? `자동 판정 ${m.automatic_comparisons}건, 사람이 확인할 항목 ${m.manual}건입니다.`
-    : `이 공고는 자동 판정이 0건이고, ${m.manual}건을 사람이 직접 확인해야 합니다.`;
+    ? `자동 판정 ${m.automatic_comparisons}건 · 담당자 확인 ${m.manual}건`
+    : `자동 판정 0건 · 담당자 확인 ${m.manual}건`;
   $('count-items').textContent = m.extracted_items;
   $('count-evidence').textContent = `${m.evidence_match} / ${m.extracted_items}`;
   $('count-auto').textContent = m.automatic_comparisons;
   $('count-manual').textContent = m.manual;
   document.querySelectorAll('.mode-card').forEach(c => c.classList.toggle('current', c.dataset.mode === mode));
-  $('mode-note').textContent = mode === 'live' ? '실제 AI 호출 1회에서 저장한 응답입니다. 지금 AI를 호출한 결과가 아닙니다.' : 'AI 작성 기준표 초안에서 만든 고정 응답입니다. 실제 AI 실험·성능 수치가 아닙니다.';
-  $('automation-note').textContent = m.automatic_comparisons ? '자동 판정은 소재지 단일 요소 1건뿐입니다. 기업 유형·인증·전체 신청 가능 여부를 뜻하지 않습니다.' : '자동 판정 0건입니다. 자격 판단 결과가 아니며 담당자 확인이 필요합니다.';
+  $('mode-note').textContent = mode === 'live' ? '저장된 AI 응답입니다. 지금 AI를 호출하지 않았습니다.' : '기준표 초안 기반 시험 결과입니다. 실제 AI 성능이 아닙니다.';
+  $('automation-note').textContent = m.automatic_comparisons ? '자동 판정은 소재지 1항목뿐입니다. 자격 판단이 아닙니다.' : '자동 판정 없음. 모든 항목을 담당자가 확인합니다.';
   $('automation-note').classList.toggle('warning', m.automatic_comparisons === 0);
-  $('input-context').textContent = `실험용 가상 소재지: ${region} / 기준일: ${selected.company.evaluation_date}`;
+  $('input-context').textContent = `가상 소재지 ${region} · 기준일 ${selected.company.evaluation_date}`;
   holdSummary(selected.rows);
   renderGroups(selected.rows);
-  $('coverage-note').textContent = `초안 인용 구간 ${m.draft_quote_spans}개 중 응답에 없는 구간 ${m.draft_quote_spans_absent}개. 병합 항목의 부분 인용도 포함으로 계산하며, 실제 누락 총수나 의미 정확도 지표가 아닙니다.`;
+  renderMyMatches(selected.rows);
+  renderChecklist(selected.rows);
+  $('coverage-note').textContent = `초안 인용 구간 ${m.draft_quote_spans}개 중 응답에 없는 구간 ${m.draft_quote_spans_absent}개. 의미 정확도 지표가 아닙니다.`;
   $('coverage').replaceChildren(...selected.coverage.map(row => {
     const div = text('div', '', 'coverage-row');
     div.append(text('span', `${row.draft_id} · ${row.draft_label}`), text('span', row.quote_span_present_in_live_rows ? '인용 구간 포함' : '인용 구간 없음'));
@@ -182,14 +232,15 @@ async function start() {
       const option = text('option', region); option.value = region; $('region').append(option);
     }
     $('source-title').textContent = demo.source.title;
-    $('source-meta').textContent = `${demo.source.publisher} / 게시일 ${demo.source.posted_date} / 접수마감된 과거 사례 / 확인일 2026-10-21`;
+    $('source-meta').textContent = `${demo.source.publisher} · 게시 ${demo.source.posted_date} · 접수 마감된 과거 공고`;
     $('source-link').href = demo.source.source_url;
     document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', render));
     $('region').addEventListener('change', render);
+    $('org-type').addEventListener('input', () => renderMyMatches(selected.rows));
     $('print').addEventListener('click', () => window.print());
     $('loading').hidden = true; $('app').hidden = false; render();
   } catch (_) {
-    $('loading').textContent = '자료를 불러오지 못했습니다. 잠시 후 새로고침해 주세요. 이 데모는 HTTPS 공유 주소 또는 로컬 HTTP 서버에서 열어야 합니다.';
+    $('loading').textContent = '자료를 불러오지 못했습니다. 새로고침하거나 HTTPS 주소로 여세요.';
   }
 }
 let closedBeforePrint = [];

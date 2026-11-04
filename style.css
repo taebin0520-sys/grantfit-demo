@@ -144,3 +144,22 @@ details.group>p.muted{margin:4px 0 10px}
 @media(max-width:600px){.mode-help{grid-template-columns:1fr}}
 .ai-label{font-size:12px;color:#5b6762;margin:6px 0 0}
 .review-note{font-size:14px;background:#fff7df;border-left:3px solid #b48923;color:#664e16;padding:8px 12px;border-radius:0 6px 6px 0;margin:6px 0 8px}
+/* 2차 정리: 짧은 문구, 입력 폼, 제출서류 체크 */
+.steps{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:14px 0 12px;counter-reset:s}
+.steps li{counter-increment:s;background:#fff;border:1px solid #c9dcd3;border-radius:6px;padding:6px 12px;font-size:14px;color:#26483c;font-weight:600}
+.steps li::before{content:counter(s) ". ";color:#5b6762;font-weight:400}
+.controls{display:block;padding:18px 0 12px}
+.controls>h2{font-size:17px;margin:0 0 10px}
+.form-row{display:flex;flex-wrap:wrap;gap:12px 16px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;min-width:200px;flex:1 1 200px}
+.field input{font:inherit;min-height:40px;padding:8px 12px;border:1px solid #b8c6c0;border-radius:6px;background:#fff}
+.my-matches{margin:12px 0 6px;font-size:14px;background:#fff;border:1px solid #d9e1dc;border-radius:8px;padding:10px 14px}
+.my-matches ul{margin:6px 0 0;padding-left:18px}
+.my-matches li{margin:3px 0;overflow-wrap:anywhere}
+.mode-set{border:0;padding:0;margin:14px 0 0}
+.mode-set legend{font-weight:600;font-size:14px}
+.check{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #d9e1dc;border-radius:6px;padding:9px 12px;margin:8px 0;font-size:14px}
+.check input{margin-top:4px;accent-color:#17664e}
+.checklist-count{font-weight:600;color:#26483c;margin:4px 0 8px}
+@media print{.check input{-webkit-appearance:auto}.controls{display:none}}
+
