@@ -11,8 +11,8 @@
       "sha256": "0c37de4abd955e38ec76abb810173798f7a67deadab979f19783e2949cb89040"
     },
     "app.js": {
-      "bytes": 5163,
-      "sha256": "af5df29dd48615dd626807ac434e7e110ea84950664a14a7df8ea17c2834c0c8"
+      "bytes": 11145,
+      "sha256": "2dfc890b79280902d1661404582c46a8cb013c7af5c690739452b02380fd180b"
     },
     "demo-data.json": {
       "bytes": 313517,
@@ -23,8 +23,8 @@
       "sha256": "161a8c509fbf1806cb2106172eb55fc1171fd7b80225d197cea9ef2f81e92ee9"
     },
     "index.html": {
-      "bytes": 4402,
-      "sha256": "15bce0cd66308bd1821b4ed064a472ef4fb87e0ea4e36320dc3644dec43b285a"
+      "bytes": 7302,
+      "sha256": "846a2ec505824d215685f673db74163cff0d06f85d213e75ec456fcd88863186"
     },
     "README.md": {
       "bytes": 1271,
@@ -39,44 +39,52 @@
       "sha256": "54f0fd4794f8726238a5d8bf689518ef3e39480268a3b46aef1e382bdb415d94"
     },
     "documents/grantfit-fixture-busan.docx": {
-      "bytes": 42686,
-      "sha256": "bd455385556c02bdc9fccf1661ef7773395723606366ce601b07e89593c4aacb"
+      "bytes": 41433,
+      "sha256": "620b492f7a3cd44f4e9b68f75e7d072220ab6baccbc17cb379f508a45e97e7dd"
     },
     "documents/grantfit-fixture-daegu.docx": {
-      "bytes": 42683,
-      "sha256": "5a2c7e09c32eb82149a67f2f6eea0e1a749df3691ccb0e500f60bcdbe587a703"
+      "bytes": 41427,
+      "sha256": "1afc4829946f2be250db83f25eaed20fc69ddc2213f00ded9dd802fcb440e4e1"
     },
     "documents/grantfit-fixture-gyeongbuk.docx": {
-      "bytes": 42678,
-      "sha256": "13d8f7adf33d8416895da935f54fbe1c2dba0b5c44969c6daf3188b0b2891e63"
+      "bytes": 41429,
+      "sha256": "9060a64d84d691e3292017d216f41914646e8d38c9a5abbd6e5a7e9e9bc225e9"
     },
     "documents/grantfit-fixture-missing.docx": {
-      "bytes": 42647,
-      "sha256": "1e37c7af0ea179b22df46c65d4f92eb35faf5c21ef3fed9ffbd8a543841395d1"
+      "bytes": 41394,
+      "sha256": "23d2f137b16fe738e88a3fbe8794c65eed299ae538df60ab2ff772a68ae99577"
     },
     "documents/grantfit-fixture-seoul.docx": {
-      "bytes": 42688,
-      "sha256": "96953072f4cd4896424bc317bd6ddfdd9287f35b20a5289b49a643f5b03cf353"
+      "bytes": 41436,
+      "sha256": "cfa0c7741bb25de9086d684f14a912d0f62a2b02470a4006682c54929779b8a3"
     },
     "documents/grantfit-live-busan.docx": {
-      "bytes": 41223,
-      "sha256": "863a121bc9e134baaa248ecd87aa3ed9e8d5836e2f131328cb21cc2bd2814cf6"
+      "bytes": 40057,
+      "sha256": "ee5d47c2890c95f032ef0eacb43ed4c87e64bdbb41d7909ecb7d99c1511170a6"
     },
     "documents/grantfit-live-daegu.docx": {
-      "bytes": 41221,
-      "sha256": "9b1b9bdfa67452295e5e4c6f4d2b632597e8bf8b3880a9fccfe832ab79cecc0d"
+      "bytes": 40055,
+      "sha256": "7abb230e661f9795b0a8323b54856cadeb170fbb7ddf2d032392929220c51e9d"
     },
     "documents/grantfit-live-gyeongbuk.docx": {
-      "bytes": 41215,
-      "sha256": "7b2c04c1ec9003c78d49d810a3e9bc51f4612ff471c0f44271f09ec24788cb33"
+      "bytes": 40055,
+      "sha256": "2026b42cb627aa684049982bd8568fdd1d33579c37898164f18d23a997e0e011"
     },
     "documents/grantfit-live-missing.docx": {
-      "bytes": 41213,
-      "sha256": "3ac469157a8608f9056bebf0c28e2493e1a3f126deadcbe898acfd57c777f638"
+      "bytes": 40053,
+      "sha256": "a96d0486d97d135e1a0b360430ba035a1c4223e2d298b47e9663f80f5f80d90c"
     },
     "documents/grantfit-live-seoul.docx": {
-      "bytes": 41222,
-      "sha256": "e04cd88e6fbacb70f0e4fd514bc05103b176bb63f2436500681cb3c13c2e3876"
+      "bytes": 40059,
+      "sha256": "ac936adcd898a356f1a64853bce787472e85445b75e8c9b6e4fd9cbee6e335f4"
+    },
+    "defense-cases.json": {
+      "bytes": 9361,
+      "sha256": "1a311dc5a3183cda2994805afebdf55fd8fa96fce5bdafd1e7faa20ba56f8605"
+    },
+    "grouping.js": {
+      "bytes": 5362,
+      "sha256": "edbad6bcbe0aa4354f85f45fd61d919325e0eb76e2523678fb5a5f5871edfa44"
     }
   }
 }

@@ -118,6 +118,8 @@ footer{padding:24px 0;color:#65716b;font-size:12px;border-top:1px solid #dce3e0;
   details>summary{list-style:none}
   details:not([open])>*:not(summary){display:block!important}
   section{padding:12px 0}
+  h1,h2,h3,summary{break-after:avoid;page-break-after:avoid}
+  section>h2,details.fold>summary{break-after:avoid}
   h1{font-size:18pt}
   h2{font-size:14pt}
   .caution,.notice,.quote{background:white}
@@ -140,3 +142,5 @@ footer{padding:24px 0;color:#65716b;font-size:12px;border-top:1px solid #dce3e0;
 details.group>summary{font-size:16px}
 details.group>p.muted{margin:4px 0 10px}
 @media(max-width:600px){.mode-help{grid-template-columns:1fr}}
+.ai-label{font-size:12px;color:#5b6762;margin:6px 0 0}
+.review-note{font-size:14px;background:#fff7df;border-left:3px solid #b48923;color:#664e16;padding:8px 12px;border-radius:0 6px 6px 0;margin:6px 0 8px}

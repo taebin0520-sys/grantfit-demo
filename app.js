@@ -38,7 +38,11 @@ function rowView(row) {
   const head = document.createElement('div');
   head.className = 'card-head';
   head.append(text('span', row.id, 'item-id'), text('span', label, `pill ${tone}`));
+  const aiLabel = text('p', 'AI 요약 (미검증)', 'ai-label');
   const title = text('h3', row.ai_summary, 'card-title');
+  const orNote = GrantFitGroups.summaryAddsOr(row)
+    ? text('p', `검토 의견: AI 요약이나 확인 정보에는 ‘또는’이 있지만 원문 인용에는 없습니다. 두 서류의 제출 관계는 원문과 담당자 확인 필요 (원문 ${row.page}쪽).`, 'review-note')
+    : null;
   const why = document.createElement('p');
   why.className = 'card-why';
   why.append(text('strong', row.evidence_valid ? `원문 ${row.page}쪽 확인. ` : '원문 확인 필요. '), text('span', row.reason ? `사유: ${GrantFitGroups.humanize(row.reason)}` : ''));
@@ -62,7 +66,7 @@ function rowView(row) {
     list.append(text('dt', '원문 위치', 'no-print'), dd);
   }
   details.append(list);
-  card.append(head, title, why, need, details);
+  card.append(head, aiLabel, title, ...(orNote ? [orNote] : []), why, need, details);
   return card;
 }
 // 업무 순서 그룹. 그룹 분류는 grouping.js가 맡고, 여기서는 화면만 그린다.
@@ -78,6 +82,7 @@ function groupBlock(group, items, open) {
 }
 function renderGroups(rows) {
   const groups = GrantFitGroups.groupRows(rows);
+  for (const g of groups) if (g.key === 'requirements') g.note = GrantFitGroups.autoNote(rows);
   const firstFilled = groups.find(g => g.rows.length);
   const blocks = groups
     .filter(g => g.rows.length || g.key === 'requirements')
