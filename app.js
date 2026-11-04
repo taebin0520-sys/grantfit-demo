@@ -25,7 +25,7 @@ function holdSummary(rows) {
   }
   const list = [...counts].sort((a, b) => b[1] - a[1]).map(([reason, n]) => {
     const li = document.createElement('li');
-    li.append(text('strong', `${n}건`), text('span', ` ${reason}`));
+    li.append(text('strong', `${n}건`), text('span', ` ${GrantFitGroups.humanize(reason)}`));
     return li;
   });
   $('hold-section').hidden = list.length === 0;
@@ -41,7 +41,8 @@ function rowView(row) {
   const title = text('h3', row.ai_summary, 'card-title');
   const why = document.createElement('p');
   why.className = 'card-why';
-  why.append(text('strong', row.evidence_valid ? `원문 ${row.page}쪽 확인. ` : '원문 확인 필요. '), text('span', row.reason ? `사유: ${row.reason}` : ''));
+  why.append(text('strong', row.evidence_valid ? `원문 ${row.page}쪽 확인. ` : '원문 확인 필요. '), text('span', row.reason ? `사유: ${GrantFitGroups.humanize(row.reason)}` : ''));
+  const need = text('p', `확인할 정보: ${GrantFitGroups.humanize(row.required_info)}`, 'card-need');
   const details = document.createElement('details');
   details.className = 'fold';
   details.append(text('summary', '원문과 세부 내용 보기'));
@@ -50,7 +51,6 @@ function rowView(row) {
     ['종류', `${row.kind} (announcement.pdf ${row.page}쪽)`],
     ['원문 인용', row.raw_quote],
     ['조건·예외', row.conditions || '별도 조건 기록 없음'],
-    ['필요 기관정보', row.required_info],
     ['자동 판정', row.automatic ? '예 - 단일 요소만 비교' : '아니오']
   ];
   for (const [key, value] of values) list.append(text('dt', key), text('dd', value, key === '원문 인용' ? 'quote' : ''));
@@ -62,29 +62,27 @@ function rowView(row) {
     list.append(text('dt', '원문 위치', 'no-print'), dd);
   }
   details.append(list);
-  card.append(head, title, why, details);
+  card.append(head, title, why, need, details);
   return card;
 }
-// 중요한 것부터: 자동 판정 → 원문 재확인 → 사람 확인. 뒤의 두 그룹은 접어 둔다.
-function groupBlock(title, items, open, note) {
+// 업무 순서 그룹. 그룹 분류는 grouping.js가 맡고, 여기서는 화면만 그린다.
+// 첫 번째로 항목이 있는 그룹만 펼치고 나머지는 접는다.
+function groupBlock(group, items, open) {
   const block = document.createElement('details');
   block.className = 'fold group';
   block.open = open;
   const summary = document.createElement('summary');
-  summary.append(text('span', `${title} ${items.length}건`));
-  block.append(summary, text('p', note, 'muted'), ...items.map(rowView));
+  summary.append(text('span', `${group.title} ${items.length}건`));
+  block.append(summary, text('p', group.note, 'muted'), ...items.map(rowView));
   return block;
 }
 function renderGroups(rows) {
-  const auto = rows.filter(r => r.evidence_valid && r.automatic);
-  const check = rows.filter(r => !r.evidence_valid);
-  const manual = rows.filter(r => r.evidence_valid && !r.automatic);
-  const blocks = [
-    groupBlock('자동 판정한 항목', auto, true,
-      auto.length ? '소재지 단일 요소만 입력값과 비교했습니다. 전체 신청 가능 여부는 판단하지 않습니다.' : '이 응답에서 자동 판정된 항목은 없습니다. 나머지는 모두 사람이 확인해야 합니다.')
-  ];
-  if (check.length) blocks.push(groupBlock('원문 재확인 필요', check, false, '인용 위치나 쪽 번호가 원문과 맞지 않습니다. 원문 PDF에서 직접 확인해 주세요.'));
-  if (manual.length) blocks.push(groupBlock('사람이 확인할 항목', manual, false, '조건·예외·정성 요건이라 자동으로 판정하지 않았습니다.'));
+  const groups = GrantFitGroups.groupRows(rows);
+  const firstFilled = groups.find(g => g.rows.length);
+  const blocks = groups
+    .filter(g => g.rows.length || g.key === 'requirements')
+    .map(g => groupBlock(g, g.rows, g === firstFilled || (g.key === 'requirements' && !firstFilled)));
+  if (!blocks.length) blocks.push(text('p', '표시할 항목이 없습니다.', 'muted'));
   $('groups').replaceChildren(...blocks);
 }
 function render() {
@@ -101,6 +99,7 @@ function render() {
   $('count-evidence').textContent = `${m.evidence_match} / ${m.extracted_items}`;
   $('count-auto').textContent = m.automatic_comparisons;
   $('count-manual').textContent = m.manual;
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.toggle('current', c.dataset.mode === mode));
   $('mode-note').textContent = mode === 'live' ? '실제 AI 호출 1회에서 저장한 응답입니다. 지금 AI를 호출한 결과가 아닙니다.' : 'AI 작성 기준표 초안에서 만든 고정 응답입니다. 실제 AI 실험·성능 수치가 아닙니다.';
   $('automation-note').textContent = m.automatic_comparisons ? '자동 판정은 소재지 단일 요소 1건뿐입니다. 기업 유형·인증·전체 신청 가능 여부를 뜻하지 않습니다.' : '자동 판정 0건입니다. 자격 판단 결과가 아니며 담당자 확인이 필요합니다.';
   $('automation-note').classList.toggle('warning', m.automatic_comparisons === 0);

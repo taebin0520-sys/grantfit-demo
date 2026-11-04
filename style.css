@@ -126,3 +126,17 @@ footer{padding:24px 0;color:#65716b;font-size:12px;border-top:1px solid #dce3e0;
   footer{font-size:8pt}
   pre{font-size:8pt}
 }
+
+/* 사용 흐름, 응답 출처 설명, 그룹 */
+.flow{list-style:none;display:flex;flex-wrap:wrap;gap:6px 10px;padding:0;margin:14px 0 10px;font-size:14px;color:#26483c;font-weight:600}
+.flow li{background:#edf4f1;border:1px solid #c9dcd3;border-radius:999px;padding:4px 12px}
+.flow li+li::before{content:"→";color:#5b6762;margin-right:10px;font-weight:400}
+.mode-help{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 4px}
+.mode-card{background:white;border:1px solid #d9e1dc;border-radius:8px;padding:10px 14px;font-size:14px}
+.mode-card b{display:block;margin-bottom:2px}
+.mode-card p{margin:0;color:#3c4a46}
+.mode-card.current{border-color:#17664e;box-shadow:inset 3px 0 0 #17664e}
+.card-need{font-size:14px;color:#26483c;margin:0 0 8px;font-weight:600}
+details.group>summary{font-size:16px}
+details.group>p.muted{margin:4px 0 10px}
+@media(max-width:600px){.mode-help{grid-template-columns:1fr}}
