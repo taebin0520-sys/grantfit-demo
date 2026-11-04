@@ -65,6 +65,28 @@ function rowView(row) {
   card.append(head, title, why, details);
   return card;
 }
+// 중요한 것부터: 자동 판정 → 원문 재확인 → 사람 확인. 뒤의 두 그룹은 접어 둔다.
+function groupBlock(title, items, open, note) {
+  const block = document.createElement('details');
+  block.className = 'fold group';
+  block.open = open;
+  const summary = document.createElement('summary');
+  summary.append(text('span', `${title} ${items.length}건`));
+  block.append(summary, text('p', note, 'muted'), ...items.map(rowView));
+  return block;
+}
+function renderGroups(rows) {
+  const auto = rows.filter(r => r.evidence_valid && r.automatic);
+  const check = rows.filter(r => !r.evidence_valid);
+  const manual = rows.filter(r => r.evidence_valid && !r.automatic);
+  const blocks = [
+    groupBlock('자동 판정한 항목', auto, true,
+      auto.length ? '소재지 단일 요소만 입력값과 비교했습니다. 전체 신청 가능 여부는 판단하지 않습니다.' : '이 응답에서 자동 판정된 항목은 없습니다. 나머지는 모두 사람이 확인해야 합니다.')
+  ];
+  if (check.length) blocks.push(groupBlock('원문 재확인 필요', check, false, '인용 위치나 쪽 번호가 원문과 맞지 않습니다. 원문 PDF에서 직접 확인해 주세요.'));
+  if (manual.length) blocks.push(groupBlock('사람이 확인할 항목', manual, false, '조건·예외·정성 요건이라 자동으로 판정하지 않았습니다.'));
+  $('groups').replaceChildren(...blocks);
+}
 function render() {
   const mode = document.querySelector('input[name="mode"]:checked').value;
   const region = $('region').value;
@@ -84,10 +106,7 @@ function render() {
   $('automation-note').classList.toggle('warning', m.automatic_comparisons === 0);
   $('input-context').textContent = `실험용 가상 소재지: ${region} / 기준일: ${selected.company.evaluation_date}`;
   holdSummary(selected.rows);
-  $('rows').replaceChildren(...selected.rows.filter(r => r.evidence_valid).map(rowView));
-  const invalid = selected.rows.filter(r => !r.evidence_valid);
-  $('invalid-section').hidden = invalid.length === 0;
-  $('invalid-rows').replaceChildren(...invalid.map(rowView));
+  renderGroups(selected.rows);
   $('coverage-note').textContent = `초안 인용 구간 ${m.draft_quote_spans}개 중 응답에 없는 구간 ${m.draft_quote_spans_absent}개. 병합 항목의 부분 인용도 포함으로 계산하며, 실제 누락 총수나 의미 정확도 지표가 아닙니다.`;
   $('coverage').replaceChildren(...selected.coverage.map(row => {
     const div = text('div', '', 'coverage-row');
