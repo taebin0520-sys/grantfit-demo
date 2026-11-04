@@ -11,8 +11,8 @@
       "sha256": "0c37de4abd955e38ec76abb810173798f7a67deadab979f19783e2949cb89040"
     },
     "app.js": {
-      "bytes": 12955,
-      "sha256": "318151189b4d014c8b3df3a8488b776dcef19e5838968b29c8a9d467aba1f88b"
+      "bytes": 13635,
+      "sha256": "9fd9f20efb4e9f712bc338ad534d5d753c250173dfdf55c5bc95fbbc52721ae6"
     },
     "demo-data.json": {
       "bytes": 313517,
@@ -23,8 +23,8 @@
       "sha256": "161a8c509fbf1806cb2106172eb55fc1171fd7b80225d197cea9ef2f81e92ee9"
     },
     "index.html": {
-      "bytes": 7726,
-      "sha256": "633ec3ef088ee015bf81e9ca642c528b2a698d142de622a3066c7b0e294550ea"
+      "bytes": 7770,
+      "sha256": "5b3c2f20333a9da00db99cbd4ff40cb6e2e71096ad0cad811c35f783670cfb59"
     },
     "README.md": {
       "bytes": 1271,
@@ -35,8 +35,8 @@
       "sha256": "eebe57c3c07d8af881445626415e27919f4f597ee156daa12ac71ef020d996d7"
     },
     "style.css": {
-      "bytes": 9983,
-      "sha256": "41904bc0a7212a5825e08791ea7c3e006f06ee3b357e44acd228d4aec507c53e"
+      "bytes": 10196,
+      "sha256": "512e1bf3f24d952f9a300fc13acc1a078f27f41ab43b54ed36a787b3a341e197"
     },
     "documents/grantfit-fixture-busan.docx": {
       "bytes": 41433,

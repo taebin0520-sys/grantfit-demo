@@ -3,7 +3,7 @@ let demo;
 let selected;
 const MATCH = '입력값 부합';
 const MISMATCH = '입력값 미부합';
-const checked = new Map(); // 제출서류 체크 상태. 메모리에만 두며 저장하지 않는다.
+const attached = new Map(); // 제출서류 id → 첨부 파일 이름. 메모리에만 두며 저장하지 않는다.
 const $ = id => document.getElementById(id);
 function text(tag, value, className) {
   const node = document.createElement(tag);
@@ -115,28 +115,42 @@ function renderMyMatches(rows) {
   list.append(...lines);
   $('my-matches').replaceChildren(text('p', head, 'muted'), list);
 }
-// 제출서류 체크리스트. 파일을 받지 않고, 상태도 저장하지 않는다.
+// 제출서류 첨부 확인. 파일 내용은 읽거나 올리지 않고, 파일 이름과 첨부 여부만 이 화면 메모리에 둔다.
+function attachedText(id) {
+  return attached.has(id) ? `첨부됨: ${attached.get(id)}` : '미첨부';
+}
 function renderChecklist(rows) {
   const docs = rows.filter(r => r.kind === '제출서류');
   const items = docs.map(r => {
-    const label = document.createElement('label');
-    label.className = 'check';
-    const box = document.createElement('input');
-    box.type = 'checkbox';
-    box.checked = checked.get(r.id) === true;
-    box.addEventListener('change', () => {
-      checked.set(r.id, box.checked);
+    const row = document.createElement('div');
+    row.className = 'check';
+    const status = text('span', attachedText(r.id), 'check-status');
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.setAttribute('aria-label', `${r.id} 서류 파일 선택`);
+    const clear = text('button', '해제', 'check-clear');
+    clear.type = 'button';
+    input.addEventListener('change', () => {
+      if (input.files.length) attached.set(r.id, input.files[0].name);
+      else attached.delete(r.id);
+      status.textContent = attachedText(r.id);
       updateChecklistCount(docs);
     });
-    label.append(box, text('span', `${r.id} ${r.ai_summary}`));
-    return label;
+    clear.addEventListener('click', () => {
+      input.value = '';
+      attached.delete(r.id);
+      status.textContent = attachedText(r.id);
+      updateChecklistCount(docs);
+    });
+    row.append(text('span', `${r.id} ${r.ai_summary}`, 'check-label'), status, input, clear);
+    return row;
   });
   $('checklist').replaceChildren(...items);
   updateChecklistCount(docs);
 }
 function updateChecklistCount(docs) {
-  const done = docs.filter(r => checked.get(r.id) === true).length;
-  $('checklist-count').textContent = `준비 ${done} / ${docs.length}건`;
+  const done = docs.filter(r => attached.has(r.id)).length;
+  $('checklist-count').textContent = `첨부 ${done} / ${docs.length}건`;
 }
 function render() {
   const mode = document.querySelector('input[name="mode"]:checked').value;

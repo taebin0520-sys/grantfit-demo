@@ -158,8 +158,11 @@ details.group>p.muted{margin:4px 0 10px}
 .my-matches li{margin:3px 0;overflow-wrap:anywhere}
 .mode-set{border:0;padding:0;margin:14px 0 0}
 .mode-set legend{font-weight:600;font-size:14px}
-.check{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #d9e1dc;border-radius:6px;padding:9px 12px;margin:8px 0;font-size:14px}
-.check input{margin-top:4px;accent-color:#17664e}
+.check{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:#fff;border:1px solid #d9e1dc;border-radius:6px;padding:9px 12px;margin:8px 0;font-size:14px}
+.check-label{flex:1 1 100%}
+.check-status{color:#5b6b64}
+.check input[type=file]{max-width:100%;font-size:13px}
+.check-clear{font:inherit;font-size:13px;padding:4px 10px;border:1px solid #9fb3a9;border-radius:4px;background:#fff;cursor:pointer}
 .checklist-count{font-weight:600;color:#26483c;margin:4px 0 8px}
 @media print{.check input{-webkit-appearance:auto}.controls{display:none}}
 
