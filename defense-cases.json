@@ -1,0 +1,269 @@
+{
+ "source": "validator.py 실제 실행 결과 (tests/test_regression_final.py, 2026-11-04)",
+ "rows": [
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-region-empty",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: location_region"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-gte-empty",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-lt-empty",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-region-space",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: location_region"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-gte-space",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-lt-space",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-region-tab_newline",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: location_region"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-gte-tab_newline",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-lt-tab_newline",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-region-null",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: location_region"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-gte-null",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-lt-null",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-region-value_key_missing",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: location_region"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-gte-value_key_missing",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-lt-value_key_missing",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-region-fact_missing",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: location_region"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-gte-fact_missing",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "빈칸·결측 입력",
+   "case": "N-revenue-lt-fact_missing",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": true,
+   "reason": "필요 기관정보 누락: annual_revenue"
+  },
+  {
+   "group": "실제 숫자 0",
+   "case": "N5-zero-gte100",
+   "expected": "입력값 미부합",
+   "actual": "입력값 미부합",
+   "evidence_valid": true,
+   "reason": "해당 단일 요소의 입력값만 대조. 전체 신청 가능 여부 판단 아님."
+  },
+  {
+   "group": "실제 숫자 0",
+   "case": "N5-zero-lt100",
+   "expected": "입력값 부합",
+   "actual": "입력값 부합",
+   "evidence_valid": true,
+   "reason": "해당 단일 요소의 입력값만 대조. 전체 신청 가능 여부 판단 아님."
+  },
+  {
+   "group": "다른 쪽에만 있는 인용",
+   "case": "C1-other-page-only-real",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "지정 페이지에서 인용문 불일치: PDF 2쪽 원문에서 인용 위치 재확인 필요"
+  },
+  {
+   "group": "다른 쪽에만 있는 인용",
+   "case": "C1-other-page-only-synthetic",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "지정 페이지에서 인용문 불일치: PDF 2쪽 원문에서 인용 위치 재확인 필요"
+  },
+  {
+   "group": "쪽 번호 범위 초과",
+   "case": "C2-page-0",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "PDF 페이지 번호 오류: 1~6쪽 범위의 정수가 아님. 원문 PDF에서 쪽 번호 재확인 필요"
+  },
+  {
+   "group": "쪽 번호 범위 초과",
+   "case": "C2-page-7-of-6",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "PDF 페이지 번호 오류: 1~6쪽 범위의 정수가 아님. 원문 PDF에서 쪽 번호 재확인 필요"
+  },
+  {
+   "group": "쪽 번호 범위 초과",
+   "case": "C2-page-99",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "PDF 페이지 번호 오류: 1~6쪽 범위의 정수가 아님. 원문 PDF에서 쪽 번호 재확인 필요"
+  },
+  {
+   "group": "원문에 없는 인용",
+   "case": "C3-quote-not-in-source",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "지정 페이지에서 인용문 불일치: PDF 1쪽 원문에서 인용 위치 재확인 필요"
+  },
+  {
+   "group": "원문에 없는 인용",
+   "case": "C3-quote-with-added-negation",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "지정 페이지에서 인용문 불일치: PDF 1쪽 원문에서 인용 위치 재확인 필요"
+  },
+  {
+   "group": "10자 미만 인용",
+   "case": "C4-short-5chars",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "인용문이 너무 짧음(공백 제외 10자 미만): 원문에서 근거 문장 재확인 필요"
+  },
+  {
+   "group": "10자 미만 인용",
+   "case": "C4-short-9chars",
+   "expected": "담당자 확인 필수",
+   "actual": "담당자 확인 필수",
+   "evidence_valid": false,
+   "reason": "인용문이 너무 짧음(공백 제외 10자 미만): 원문에서 근거 문장 재확인 필요"
+  },
+  {
+   "group": "정상 인용·충족 조건",
+   "case": "C8-real-D01-daegu",
+   "expected": "입력값 부합",
+   "actual": "입력값 부합",
+   "evidence_valid": true,
+   "reason": "해당 단일 요소의 입력값만 대조. 전체 신청 가능 여부 판단 아님."
+  },
+  {
+   "group": "정상 인용·충족 조건",
+   "case": "C8-synthetic-revenue-150-gte100",
+   "expected": "입력값 부합",
+   "actual": "입력값 부합",
+   "evidence_valid": true,
+   "reason": "해당 단일 요소의 입력값만 대조. 전체 신청 가능 여부 판단 아님."
+  },
+  {
+   "group": "정상 인용·미충족 조건",
+   "case": "C9-real-D01-busan",
+   "expected": "입력값 미부합",
+   "actual": "입력값 미부합",
+   "evidence_valid": true,
+   "reason": "해당 단일 요소의 입력값만 대조. 전체 신청 가능 여부 판단 아님."
+  },
+  {
+   "group": "정상 인용·미충족 조건",
+   "case": "C9-synthetic-revenue-50-gte100",
+   "expected": "입력값 미부합",
+   "actual": "입력값 미부합",
+   "evidence_valid": true,
+   "reason": "해당 단일 요소의 입력값만 대조. 전체 신청 가능 여부 판단 아님."
+  }
+ ]
+}
